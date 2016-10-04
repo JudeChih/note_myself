@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" type="image/x-icon" href="images/lock.png">
+	<title>Sass_Note by Jude</title>
+
+	<!-- css style -->
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="stylesheets/note_style.css">
+	<!-- //css style -->
+
+	<!-- js style -->
+	<script src="js/jquery-3.1.0.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/note_style.js"></script>
+	<!-- //js style -->
+
+</head>
+<body>
+	<div id="wrap">
+		<div class="three_btns">
+			<div class="previous_btn" data-index="1"><i class="fa fa-chevron-up" aria-hidden="true"></i></div>
+			<div class="top_btn" data-index="2">TOP</div>
+			<div class="next_btn" data-index="3"><i class="fa fa-chevron-up" aria-hidden="true"></i></div>
+		</div>
+		<header>
+			<nav class="navbar navbar-inverse" role="navigation">
+				<div class="container-fluid">
+				    <div class="navbar-header">
+				      	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					        <span class="sr-only">Toggle navigation</span>
+					        <span class="icon-bar"></span>
+					        <span class="icon-bar"></span>
+					        <span class="icon-bar"></span>
+				      	</button>
+					    <a class="navbar-brand" href="#">
+					      	<img src="images/White.png" alt="">
+					    </a>
+				    </div>
+				    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				      	<ul class="nav navbar-nav">
+				        	<li><a href="">HTML<span class="sr-only">(current)</span></a></li>
+				        	<li><a href="">CSS</a></li>
+				        	<li class="active"><a href="sass_note.html">SASS</a></li>
+				        	<li><a href="js_note.html">JS</a></li>
+				        	<!-- <li class="active" data-index="sass_note.html"><a>SASS</a></li>
+				        	<li data-index="js_note.html"><a>JS</a></li> -->
+				      	</ul>
+
+				      	<ul class="nav navbar-nav navbar-right">
+				        	<li><a href="#">Jude志的程式之旅</a></li>
+				      	</ul>
+				    </div>
+				</div>
+			</nav>
+		</header>
+<!--<div id="note1" class="col-md-12 note_border">
+			<h2></h2>
+			<h6><var></var></h6>
+			<div class="col-md-12 note_content">
+				<h3></h3>
+				<p></p>
+				<pre>
+				</pre>
+			</div>
+		</div> -->
+		<div id="main" class="container">
+			<div class="row">
+				<div class="page-header">
+				  	<h1>SASS隨手記 <small> by Jude</small></h1>
+				</div>
+				<div id="sass_note1" class="col-md-12 note_border">
+					<h2>@mixin指令介紹</h2>
+					<h6><var>Mixins可以包含任意内容且可以傳遞參數，因此比'@extend'更加靈活和强大。</var></h6>
+					<div class="col-md-12 note_content">
+						<h3>@Mixins的定義及使用</h3>
+						<p>首先我要先把兩個待會會重複使用到的樣式定義成mixins模塊</p>
+						<pre>
+@mixin button {
+    font-size: 1em;
+    padding: 0.5em 1.0em;
+    text-decoration: none;
+    color: #fff;
+}
+@mixin link {
+    a {
+        color: blue;
+
+        &:visited {
+            color: purple;
+        }
+        &:hover {
+            color: white;
+        }
+        &:active {
+            color: red;
+        }
+    }
+}
+						</pre>
+						<p>再來我們可以通過<span>@include</span>來調用具有相同名稱的mixin模塊</p>
+						<pre>
+.button-green {
+    @include button;
+    background-color: green;
+}
+						</pre>
+						<p>解析後的CSS就如下所示</p>
+						<pre>
+.button-green {
+    font-size: 1em;
+    padding: 0.5em 1.0em;
+    text-decoration: none;
+    color: #fff;
+    background-color: green;
+}
+						</pre>
+						<p>在定義mixin的時候也可已包含其它的mixin</p>
+						<pre>
+@mixin button-blue {
+    @include button;
+    @include link;
+}
+						</pre>
+						<p>剛剛一開始新定義的<span>@mixin link</span>雖然是一層包一層但是依舊是可以直接被調用的</p>
+						<pre>
+@include link;
+						</pre>
+						<p>在CSS直接被解析成</p>
+						<pre>
+a {
+    color: blue;
+
+    &:visited {
+        color: purple;
+    }
+    &:hover {
+        color: white;
+    }
+    &:active {
+        color: red;
+    }
+}
+						</pre>
+						<p>前提是這個模塊必須包含了選擇器也包含了樣式，如果我們今天直接<span>@include button</span>就解析不出東西來</p>
+						<h3>參數的使用</h3>
+						<p>Mixins可以接收和使用參數，這使得它比<span>@extend</span>更加強大和靈活。以下我針對一開始的<span>button</span>模塊增加了名為<span>background</span>的參數並將其傳遞給模塊。</p>
+						<pre>
+@mixin button($background) {
+    font-size: 1em;
+    padding: 0.5em 1.0em;
+    text-decoration: none;
+    color: #fff;
+    background: $background;
+}
+						</pre>
+						<p>接下來我們來做一個綠色的按鈕吧，直接傳遞green的參數給它就行囉</p>
+						<pre>
+.button-green {
+    @include button(green);
+}
+						</pre>
+						<p>CSS解析出來就會變成以下那樣</p>
+						<pre>
+.button-green {
+    font-size: 1em;
+    padding: 0.5em 1.0em;
+    text-decoration: none;
+    color: #fff;
+    background: green;
+}
+						</pre>
+						<p>當然這種傳遞參數一次不只可以傳一個，參數間用逗號隔開，可以傳大量!!!!</p>
+						<pre>
+@mixin button($background, $color) {
+    font-size: 1em;
+    padding: 0.5em 1.0em;
+    text-decoration: none;
+    color: $color;
+    background: $background;
+}
+
+.button-green {
+    @include button(green, #fff);
+}
+						</pre>
+						<p>但是這種傳遞參數的設定有個問題，就是當你在<span>@include</span>調用時沒有傳遞參數，會收到一個編譯錯誤的提示，為了不讓這個問題發生，通常我們會給它設定一個默認值</p>
+						<pre>
+@mixin button($background: green) {
+    font-size: 1em;
+    padding: 0.5em 1.0em;
+    text-decoration: none;
+    color: #fff;
+    background: $background;
+}
+						</pre>
+						<p>還有就是為了幫助你的代碼更加容易理解，你可以在傳遞值給mixin時將參數名稱和參數值一併傳遞過去</p>
+						<pre>
+.button-green {
+    @include button($background: green, $color: #fff);
+}
+						</pre>
+						<h3>數量可變的參數</h3>
+						<p>Mixins可以接收未知數量的參數，以下我用<span>box-shadows</span>來做解釋，新增兩層陰影</p>
+						<pre>
+.container {
+    box-shadow: 0px 1px 2px #333,
+                2px 3px 4px #ccc;
+}
+						</pre>
+						<p>接下來開始定義mixin，重要的點就是參數那邊後面要加上三個點(...)，這很重要，加上它，你就可以任意變更你要放多少參數進去，可多可少</p>
+						<pre>
+@mixin box-shadows($shadow...) {
+    box-shadow: $shadow;
+}
+
+.container {
+    @include box-shadows(0px 1px 2px #333, 2px 3px 4px #ccc);
+}
+						</pre>
+						<p>參數間用逗號隔開即可，就是這麼簡單，你想要幾層陰影都可以</p>
+						<h3>總結</h3>
+						<p>Mixins是一個在提高代碼重複使用率方面非常有用的指令，而且能夠使用和傳遞參數這一點使得它非常的強大，你可以在創建misins時設置默認值來防止編譯錯誤，同時也可以在調用時覆蓋默認值，甚至還可以更加靈活的傳遞數量可變的參數。</p>
+					</div>
+				</div>
+				<div id="sass_note2" class="col-md-12 note_border">
+					<h2>Sass的表达式和控制命令</h2>
+					<h6><var>在上一篇我們了解了mixin，一個獨立的mixin往往聚集了大量的控制指令來實現複雜的功能，本文我們來講解一下這些控制指令和表達式並且做些例子，不一定常用，但是多熟悉點以備不時之需囉</var></h6>
+					<div class="col-md-12 note_content">
+						<h3>if()</h3>
+						<p><span>if()</span>是Sass的一個內建函數，與之相似的<span>@if</span>則是一個内建指令，<span>if()</span>用来做條件判斷並返回特定值</p>
+						<pre>
+@mixin test($condition) {
+    $color: if($condition, blue, red);
+    color:$color
+}
+
+.firstClass {
+    @include test(true);
+}
+
+.secondClass {
+    @include test(false);
+}
+						</pre>
+						<p>上例子中<span>if()</span>裡面的三個參數分別代表:測試條件，測試成功返回值，測試失敗返回值，其實這邊判斷式除了<span>false</span>和<span>null</span>會回傳失敗值，其它都會被視為成功回傳成功值</p>
+						<h3>@if</h3>
+						<p>這個用法就很像是js裡的if判別式，根本就是只是長相不一樣罷了</p>
+						<pre>
+@mixin txt($weight) {
+    color: white;
+    @if $weight == bold { font-weight: bold;}
+}
+
+.txt1 {
+    @include txt(none);
+}
+
+.txt2 {
+    @include txt(bold);
+}
+						</pre>
+						<p>CSS解析出來就長這樣</p>
+						<pre>
+.txt1 {
+    color: white;
+}
+
+.txt2 {
+    color: white;
+    font-weight: bold;
+}
+						</pre>
+						<p>既然是跟js的if一樣，那當然也少不了<span>@else if</span>以及<span>@else</span></p>
+						<pre>
+@mixin txt($weight) {
+    color: white;
+    @if $weight == bold { font-weight: bold;}
+    @else if $weight == light { font-weight: 100;}
+    @else if $weight == heavy { font-weight: 900;}
+    @else { font-weight: normal;}
+}
+
+.txt1 {
+    @include txt(bold);
+}
+
+.txt2 {
+    @include txt(light);
+}
+
+.txt3 {
+    @include txt(heavy);
+}
+
+.txt4 {
+ @include txt(none);
+}
+
+.txt5 {
+    @include txt(normal)
+}
+						</pre>
+						<p>CSS解析出來就長這樣</p>
+						<pre>
+.txt1 {
+    color: white;
+    font-weight: bold;
+}
+
+.txt2 {
+    color: white;
+    font-weight: 100;
+}
+
+.txt3 {
+    color: white;
+    font-weight: 900;
+}
+
+.txt4 {
+    color: white;
+    font-weight: normal;
+}
+
+.txt5 {
+    color: white;
+    font-weight: normal;
+}
+						</pre>
+						<p>其實上述的<span>.txt4</span>和<span>.txt5</span>也可以不傳入值，也會有相同的答案</p>
+						<h3>@for</h3>
+						<p>對!!你想得沒錯就是循環輸出，唯一不一樣的就是它的寫法，有兩種方式：<span>from start through end</span>和<span>from start to end</span>，兩者的區別就是在結尾的地方，前者是有包含<span>end</span>後者只到<span>end-1</span>，然後你會有個疑問不是應該要有類似<span>i++</span>或是<span>i--</span>，這邊你只需要<span>start</span>比<span>end</span>就是遞減，反之則遞增</p>
+						<pre>
+@for $i from 1 through 4 {
+    .col-#{$i} { width: 100/4 * $i + %;}
+}
+						</pre>
+						<p>CSS解析出來就長這樣</p>
+						<pre>
+.col-1 {
+  width: 25%;
+}
+
+.col-2 {
+  width: 50%;
+}
+
+.col-3 {
+  width: 75%;
+}
+
+.col-4 {
+  width: 100%;
+}
+						</pre>
+						<p>這例子因為有點簡短，所以我在例子中還放了其它的元素，循環、變量、計算等多重功能</p>
+						<h3>@each</h3>
+						<p>這個嘛...有點難解釋，這邊就直接看例子吧</p>
+						<pre>
+@each $usr in bob, john, bill, mike {
+    .#{$usr}-avatar {
+        background-image: url('/img/#{$usr}.png');
+     }
+}
+						</pre>
+						<p>CSS解析出來就長這樣</p>
+						<pre>
+.bob-avatar {
+    background-image: url("/img/bob.png");
+}
+
+.john-avatar {
+    background-image: url("/img/john.png");
+}
+
+.bill-avatar {
+    background-image: url("/img/bill.png");
+}
+
+.mike-avatar {
+    background-image: url("/img/mike.png");
+}
+						</pre>
+						<p>接下來的更難懂了，使用多個參數來保存相應的元素</p>
+						<pre>
+$alt: alert, yellow, red;
+
+$sub: submit, white, green;
+
+$bck: back, blue, transparent;
+
+@each $type, $txt, $back in $alt,$sub,$bck {
+    .#{$type}-button {
+        color: $txt;
+        background-color: $back;
+    }
+}
+						</pre>
+						<p>CSS解析出來就長這樣</p>
+						<pre>
+.alert-button {
+    color: yellow;
+    background-color: red;
+}
+
+.submit-button {
+    color: white;
+    background-color: green;
+}
+
+.back-button {
+    color: blue;
+    background-color: transparent;
+}
+						</pre>
+						<h3>@while</h3>
+						<p>也是一種循環回圈的寫法，如果表達式結果為false，則停止循環</p>
+						<pre>
+$x:1;
+
+@while $x < 13 {
+    .col-#{$x} { width: 100/12 * $x;}
+    $x: $x + 1;
+};
+						</pre>
+						<p>上述先設定一個變數為1，然後每執行一次while變數就+1值到變數大於13的時候就終止迴圈</p>
+						<h3>總結</h3>
+						<p>就如一開始所說，這些控制指令和控制項對於淺用sass的使用者應該是用不上的，指令很強大，如果你更在深入使用它一定會發現其中的奧妙</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer>
+			<h5>Copyright © 2016 Jude Chih</h5>
+		</footer>
+	</div>
+
+</body>
+</html>

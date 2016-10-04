@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" type="image/x-icon" href="images/lock.png">
+	<title>Js_Note by Jude</title>
+
+	<!-- css style -->
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="stylesheets/note_style.css">
+	<!-- //css style -->
+
+	<!-- js style -->
+	<script src="js/jquery-3.1.0.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/note_style.js"></script>
+	<!-- //js style -->
+
+</head>
+<body>
+	<div id="wrap">
+		<div class="three_btns">
+			<div class="previous_btn" data-index="1"><i class="fa fa-chevron-up" aria-hidden="true"></i></div>
+			<div class="top_btn" data-index="2">TOP</div>
+			<div class="next_btn" data-index="3"><i class="fa fa-chevron-up" aria-hidden="true"></i></div>
+		</div>
+		<header>
+			<nav class="navbar navbar-inverse" role="navigation">
+				<div class="container-fluid">
+				    <div class="navbar-header">
+				      	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					        <span class="sr-only">Toggle navigation</span>
+					        <span class="icon-bar"></span>
+					        <span class="icon-bar"></span>
+					        <span class="icon-bar"></span>
+				      	</button>
+					    <a class="navbar-brand" href="#">
+					      	<img src="images/White.png" alt="">
+					    </a>
+				    </div>
+				    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				      	<ul class="nav navbar-nav">
+				        	<li><a href="#">HTML<span class="sr-only">(current)</span></a></li>
+				        	<li><a href="#">CSS</a></li>
+				        	<li><a href="sass_note.html">SASS</a></li>
+				        	<li class="active"><a href="js_note.html">JS</a></li>
+				      	</ul>
+				      	<ul class="nav navbar-nav navbar-right">
+				        	<li><a href="#">Jude志的程式之旅</a></li>
+				      	</ul>
+				    </div>
+				</div>
+			</nav>
+		</header>
+<!--<div id="note1" class="col-md-12 note_border">
+			<h2></h2>
+			<h6><var></var></h6>
+			<div class="col-md-12">
+				<h3></h3>
+				<p></p>
+				<pre>
+				</pre>
+			</div>
+		</div> -->
+		<div id="main" class="container">
+			<div class="row">
+				<div class="page-header">
+				  	<h1>JS隨手記 <small> by Jude</small></h1>
+				</div>
+				<div id="js_note1" class="col-md-12 note_border">
+					<h2>JS小撇步之一</h2>
+					<h6><var>需要什麼就上網找就可以學到什麼</var></h6>
+					<div class="col-md-12 note_content">
+						<h3>將顯示出來的東西關閉</h3>
+						<p>這個就是我本來用<span>&lt;ul&gt;&lt;li&gt;</span>做了一個彈出式選單，然後選完它會自動消失，現在就是卡在如果我沒選值，然後要去做其他事情的時候，這個區塊不會消失，所以用了這個方式，當我滑鼠點擊其他地方的時候會判斷，如果點的是本體就不管這個function，如果是其他地方就會消失</p>
+						<pre>
+$(document).mouseup(function(e){
+    var _con1 = $('.competition_select');
+    if(!_con1.is(e.target) && _con1.has(e.target).length === 0){
+        $('.competition_select').css('display','none');
+    }
+    var _con2 = $('.support_select');
+    if(!_con2.is(e.target) && _con2.has(e.target).length === 0){
+        $('.support_select').css('display','none');
+    }
+});
+						</pre>
+					</div>
+				</div>
+				<div id="js_note2" class="col-md-12 note_border">
+					<h2>JS小撇步之二</h2>
+					<h6><var>需要什麼就上網找就可以學到什麼</var></h6>
+					<div class="col-md-12 note_content">
+						<h3>將一串數字三位一點隔開</h3>
+						<p>之前一件案子需要將大量的數字讓他們更方便了解是多少錢，所以要三位數一個逗點比較好識別，所以學到了這個</p>
+						<pre>
+var thousandComma = function(number){
+    var num = number.toString();
+    var pattern = /(-?\d+)(\d{3})/;
+    while(pattern.test(num)){
+        num = num.replace(pattern, "$1,$2");
+    }
+    return num;
+}
+var j_n_l = $('.j_num').length;
+for (var i = 0; i <= j_n_l; i++) {
+    $('.j_num').eq(i).text(thousandComma($('.j_num').eq(i).text()));
+}
+						</pre>
+					</div>
+				</div>
+				<div id="js_note3" class="col-md-12 note_border">
+					<h2>JS小撇步之三</h2>
+					<h6><var>需要什麼就上網找就可以學到什麼</var></h6>
+					<div class="col-md-12 note_content">
+						<h3>沒填資料會顯示，反之則無</h3>
+						<p>之前一個案子的需求，要有一個<span>&lt;input&gt;</span>沒有值得時候點擊會出現選項區塊，但是又要讓它可以編輯所以這邊不適用<span>&lt;select&gt;</span>自行做了一個<span>&lt;ul&gt;&lt;li&gt;</span>這邊就不多做說明，當點擊的時候要去判斷<span>&lt;input&gt;</span>是否有值，然後做以下的事情</p>
+						<pre>
+$('div button').on('click',function(){
+    var input = $(this).parent('div').find('input');
+    var select = $(this).parent('div').siblings().find('ul');
+    if(input.val() ==""){
+        select.css('display','block');
+    }
+    select.find('li').on('click',function(){
+        var a = $(this).text();
+        input.val(a);
+        select.css('display','none');
+    })
+})
+						</pre>
+					</div>
+				</div>
+				<div id="js_note4" class="col-md-12 note_border">
+					<h2>JS小撇步之四</h2>
+					<h6><var>需要什麼就上網找就可以學到什麼</var></h6>
+					<div class="col-md-12 note_content">
+						<h3>強置中斷for迴圈</h3>
+						<p>為了做出點擊可以往上或往下跑到某一個小撇步，但是因為小撇步到時候會越來越多所以不能寫死，必須跑迴圈然後判斷，但是又怕之後小撇步一多了以後不可能每次都全部都要跑完吧，所以只要一達到要求，做完事情以後就必須用一個<span>break</span>直接終止<span>for</span>迴圈</p>
+						<pre>
+for(var i =0;i<=$('.note_border').length;i++){
+    if($('.note_border').eq(i).offset().top < $(window).scrollTop() && $('.note_border').eq(i+1).offset().top > $(window).scrollTop()){
+        $('html,body').animate({'scrollTop':$('.note_border').eq(i).offset().top},($(window).scrollTop()-$('.note_border').eq(i).offset().top));
+        break;
+    }else if($('.note_border').eq(0).offset().top > $(window).scrollTop() || $('.note_border').eq(0).offset().top == $(window).scrollTop()){
+        $('html,body').animate({'scrollTop':'0px'},$(window).scrollTop());
+        break;
+    }else if($('.note_border').eq(i).offset().top == $(window).scrollTop()){
+        $('html,body').animate({'scrollTop':$('.note_border').eq(i-1).offset().top},$(window).scrollTop() - $('.note_border').eq(i-1).offset().top);
+        break;
+    }
+}
+						</pre>
+					</div>
+				</div>
+				<div id="js_note5" class="col-md-12 note_border">
+					<h2>JS小撇步之五</h2>
+					<h6><var>需要什麼就上網找就可以學到什麼</var></h6>
+					<div class="col-md-12 note_content">
+						<h3>將.data()跟switch靈活運用</h3>
+						<p>以前的我，如果是針對按鈕下設定的話，明明就是同一層功能也都差不多，但是我就是必須要分開寫而且寫死，之後學到<span>.data()</span>和<span>switch</span>以後，只要分別在每個按鈕後面下不同的<span>data-index="???"</span>然後到js用<span>switch</span>來判斷並對其不同的按鈕設定不同的事件</p>
+						<pre>
+f$('.three_btns div').on('click',function(){
+    var n = $(this).data('index');
+    switch(n){
+        case 1:
+            moveUp();
+            break;
+        case 2:
+            gotoTop();
+            break;
+        case 3:
+            moveDown();
+            break;
+    }
+})
+						</pre>
+						<p>上面我就是把抓取到的值設定成一個變數然後丟入<span>switch</span>不同的值會有不同的<span>case</span>認領，然後做不同的事件，這邊我為了美化程式碼，我把事件都拉到外面設定成匿名函數，需要的時後呼叫就好，這樣程式碼看起來會比較乾淨也比較好找好修改</p>
+						<pre>
+function moveUp(){
+    for(var i =0;i<=$('.note_border').length;i++){
+    if($('.note_border').eq(i).offset().top < $(window).scrollTop() && $('.note_border').eq(i+1).offset().top > $(window).scrollTop()){
+        $('html,body').animate({'scrollTop':$('.note_border').eq(i).offset().top},($(window).scrollTop()-$('.note_border').eq(i).offset().top));
+        break;
+    }else if($('.note_border').eq(0).offset().top > $(window).scrollTop() || $('.note_border').eq(0).offset().top == $(window).scrollTop()){
+        $('html,body').animate({'scrollTop':'0px'},$(window).scrollTop());
+        break;
+    }else if($('.note_border').eq(i).offset().top == $(window).scrollTop()){
+        $('html,body').animate({'scrollTop':$('.note_border').eq(i-1).offset().top},$(window).scrollTop() - $('.note_border').eq(i-1).offset().top);
+        break;
+    }
+  }
+}
+function moveDown(){
+    for(var i =0;i<=$('.note_border').length;i++){
+        if($('.note_border').eq(i).offset().top < $(window).scrollTop() && $('.note_border').eq(i+1).offset().top > $(window).scrollTop()){
+            $('html,body').animate({'scrollTop':$('.note_border').eq(i+1).offset().top},($(window).scrollTop()-$('.note_border').eq(i).offset().top));
+            break;
+        }else if($('.note_border').eq(0).offset().top > $(window).scrollTop()){
+            $('html,body').animate({'scrollTop':$('.note_border').eq(0).offset().top},$('.note_border').eq(0).offset().top-$(window).scrollTop());
+        }else if($('.note_border').eq(i).offset().top == $(window).scrollTop()){
+            $('html,body').animate({'scrollTop':$('.note_border').eq(i+1).offset().top},$('.note_border').eq(i+1).offset().top-$(window).scrollTop())
+        }
+    }
+}
+function gotoTop(){
+    $('html,body').animate({'scrollTop':'0px'},$(window).scrollTop());
+}
+						</pre>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer>
+			<h5>Copyright © 2016 Jude Chih</h5>
+		</footer>
+	</div>
+
+</body>
+</html>
