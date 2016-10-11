@@ -55,7 +55,7 @@ $(function(){
 		}
 	}
 	function gotoTop(){
-		$('html,body').animate({'scrollTop':'0px'},$(window).scrollTop());
+		$('html,body').animate({'scrollTop':'0px'},($(window).scrollTop()/10));
 	}
 	$(window).scroll(function(){
 

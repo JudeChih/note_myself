@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="shortcut icon" type="image/x-icon" href="images/lock.png">
+	<link rel="shortcut icon" type="image/x-icon" href="images/Bnter.png">
 	<title>Sass_Note by Jude</title>
 
 	<!-- css style -->
@@ -38,13 +38,13 @@
 					        <span class="icon-bar"></span>
 				      	</button>
 					    <a class="navbar-brand" href="#">
-					      	<img src="images/White.png" alt="">
+					      	<img src="images/Bnter-2.png" alt="">
 					    </a>
 				    </div>
 				    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				      	<ul class="nav navbar-nav">
-				        	<li><a href="">HTML<span class="sr-only">(current)</span></a></li>
-				        	<li><a href="">CSS</a></li>
+				        	<!-- <li><a href="">HTML<span class="sr-only">(current)</span></a></li>
+				        	<li><a href="">CSS</a></li> -->
 				        	<li class="active"><a href="sass_note.html">SASS</a></li>
 				        	<li><a href="js_note.html">JS</a></li>
 				        	<!-- <li class="active" data-index="sass_note.html"><a>SASS</a></li>
@@ -58,7 +58,7 @@
 				</div>
 			</nav>
 		</header>
-<!--<div id="note1" class="col-md-12 note_border">
+<!--<div id="sass_note1" class="col-md-12 note_border">
 			<h2></h2>
 			<h6><var></var></h6>
 			<div class="col-md-12 note_content">
@@ -72,6 +72,26 @@
 			<div class="row">
 				<div class="page-header">
 				  	<h1>SASS隨手記 <small> by Jude</small></h1>
+				</div>
+				<div id="sass_note_ex" class="col-md-12 note_border">
+					<h2>為什麼要開始學習Sass</h2>
+					<h6><var>本文不會教你如何使用Sass，只是告訴你為什麼要使用Sass，以及我喜歡它什麼功能</var></h6>
+					<div class="col-md-12 note_content">
+						<h3>前言</h3>
+						<p>我最初摸到Sass是朋友教我並建議我必須熟悉Sass在這條路上會更吃香，在之後則是因為我喜歡Sass裡面很多有趣的功能，很多在CSS做不到的事情但是我覺得可以做到的，然後在Sass真的全部都做到了，我就覺得哇~~Amazing，到後來剛好公司後端是用Larvel開發PHP，Larvel是PHP框架，重點是它支援Sass，所以使用Sass可以更容易上手Larvel，就促使我繼續嘗試去了解它、挖掘它，到後來就愛上它</p>
+						<h3>Sass就是CSS</h3>
+						<p>就字面翻譯Sass就是CSS，如果你真不喜歡Sass的特性，你也可以直接書寫CSS，然而當你需要一些Sass的特性也可以直接書寫進來</p>
+						<h3>Import〈引入〉</h3>
+						<p>之前我們單單書寫CSS的話就是從頭到尾都寫在同一個外部CSS裡，這邊有<span>Import</span>引入功能，你可以將冗長的CSS分割成不同區塊所需要的CSS，哪邊需要哪邊引入就好</p>
+						<h3>Variables〈變量〉</h3>
+						<p>這個你應該懂吧，設定變數，並且把你要的值丟給它，當你需要這個值得時候只要呼叫變數就好，就不用再寫入冗長的設定，也可以改一個變數，所有擁有這變數的地方全部都改變，多方便阿</p>
+						<h3>Nesting〈嵌套〉</h3>
+						<p>就拿RWD的設計來說，之前再用CSS編寫的時候都會苦惱要把<span>@media</span>統一放在哪邊，之後都全部放在最底部，只是這樣我們會把所有的設定都是集中放在一起，之後管理起來其實很麻煩的</p>
+						<p>如果用Sass的話你可以針對某一個Class要下RWD設定就直接在裡面放置<span>@media</span>這樣不就很好管理了嗎，哪邊的RWD樣式需要調整就去哪邊調</p>
+						<p>還有一個例子，就像是在某個class或是id或是tag底下使用<span>&</span>它可以代表本身，就可以直接寫<span>&:hover</span>或<span>&:active</span></p>
+						<h3>Extend〈繼承〉</h3>
+						<p>簡單來說的話，就是當你有兩個class他們有著相同的設定但是也有些是不同的設定，你可以把他們相同的地方拉出來設定成一個class，然後這兩個class可以直接<span>@extend</span>，然後在各別設定自己不同的設定</p>
+					</div>
 				</div>
 				<div id="sass_note1" class="col-md-12 note_border">
 					<h2>@mixin指令介紹</h2>
@@ -433,12 +453,172 @@ $x:1;
 						<p>就如一開始所說，這些控制指令和控制項對於淺用sass的使用者應該是用不上的，指令很強大，如果你更在深入使用它一定會發現其中的奧妙</p>
 					</div>
 				</div>
+				<div id="sass_note3" class="col-md-12 note_border">
+					<h2>Sass特殊符號</h2>
+					<h6><var>各式各樣的符號在每個環境下有不同的用途，今天來介紹sass的</var></h6>
+					<div class="col-md-12 note_content">
+						<h3>賦予值的符號</h3>
+						<p>Sass使用冒號<span>：</span>來定義一個定量</p>
+						<pre>
+$main-color: lightgray;
+						</pre>
+						<h3>運算符號</h3>
+						<p>就是加減乘除做數學運算的符號</p>
+						<pre>
+符號	介紹
++	加
+-	減
+*	乘
+/	除
+%	取餘數
+						</pre>
+						<h3>等於符號</h3>
+						<p>相等操作符號</p>
+						<pre>
+符號	介紹
+==	等於
+!=	不等於
+						</pre>
+						<p>以下是例子</p>
+						<pre>
+@mixin font-fl($font){
+    &:after {
+        @if(type-of($font) == string) {
+            content: 'My font is: #{$font}.';
+        } @else {
+            content: 'Sorry, the argument #{$font} is a #{type-of($font)}.';
+        }
+    }
+}
+
+h2{
+    @include font-fl(sans-serif);
+}
+						</pre>
+						<p>CSS解析出來就長這樣</p>
+						<pre>
+h2:after {
+    content: 'My font is: sans-serif.';
+}
+						</pre>
+						<p>通常等於<span>==</span>跟不等於<span>!=</span>都用於判斷式居多，但是sass不支持<span>===</span>只會視為<span>==</span></p>
+						<h3>比較符號</h3>
+						<p>其實就跟等於不等於很像，用來比較數值的</p>
+						<pre>
+符號	介紹
+>	大於
+>=	大於或等於
+<	小於
+<=	小於或等於
+						</pre>
+						<p>以下是例子</p>
+						<pre>
+$padding: 50px;
+
+h2 {
+    @if($padding <= 20px) {
+        padding: $padding;
+    } @else {
+        padding: $padding / 2;
+    }
+}
+						</pre>
+						<p>CSS解析出來就長這樣</p>
+						<pre>
+h2 {
+    padding: 25px;
+}
+						</pre>
+						<h3>邏輯符號</h3>
+						<p>常用於測試多個條件判斷式</p>
+						<pre>
+符號	條件	介紹
+and	x and y	與
+or	x or y	或
+not	not x	相反
+						</pre>
+						<p>以下是例子</p>
+						<pre>
+$list-map: (success: lightgreen, alert: tomato, info: lightblue);
+
+@mixin button-state($btn-state) {
+    @if (length($list-map) > 2 or length($list-map) < 5) {
+        background-color: map-get($list-map, $btn-state);
+    }
+}
+
+.btn {
+    @include button-state(success);
+}
+						</pre>
+						<p>CSS解析出來就長這樣</p>
+						<pre>
+.btn {
+    background-color: lightgreen;
+}
+						</pre>
+						<h3>串接字串的符號</h3>
+						<p>當然是用<span>+</span>，它不只可以運算也可以用來串接字串</p>
+						<pre>
+@mixin string-concat {
+    &:after {
+        content: "My favorite language is " + Sass;
+        font: Arial + " sans-serif";
+    }
+}
+
+h2 {
+    @include string-concat;
+}
+						</pre>
+						<p>CSS解析出來就長這樣</p>
+						<pre>
+h2:after {
+    content: "My favorite language is Sass";
+    font: Arial sans-serif;
+}
+						</pre>
+						<h3>色碼運算</h3>
+						<p>這邊超酷的是，就連色碼相加都可以做運算</p>
+						<pre>
+h2 {
+    color: #468499 + #204479;
+}
+						</pre>
+						<p>CSS解析出來就長這樣</p>
+						<pre>
+h2 {
+    color: #66c8ff;
+}
+						</pre>
+						<p>更厲害的來了，它還可以做rgba()的運算，但是它不能運算透明度</p>
+						<pre>
+h2 {
+    color: rgba(70, 132, 153, 1) + rgba(32, 68, 121, 1);
+		// 第一個可以正常運算相加
+    color: rgba(70, 132, 153, .9) + rgba(32, 68, 121, .7);
+    // 這個會有問題，不會運算透明度，所以透明度數值要一致
+}
+						</pre>
+						<h3>總結</h3>
+						<p>這邊沒什麼心得，就讓大家更了解sass裡面的特殊符號有哪些，都有哪些用法，還有哪些需要注意的地方，讓我們繼續在sass路上打滾向前吧</p>
+					</div>
+				</div>
+				<div id="sass_note4" class="col-md-12 note_border">
+					<h2>使用Sass來定義Keyframes</h2>
+					<h6><var>直接是用CSS來呈現動畫效果，主要是依賴@keyframes下面我要介紹透過Sass設定</var></h6>
+					<div class="col-md-12 note_content">
+						<h3>CSS中的keyframes</h3>
+						<p>簡單的回憶一下，如果要使用</p>
+						<pre>
+						</pre>
+					</div>
+				</div>
 			</div>
 		</div>
 		<footer>
 			<h5>Copyright © 2016 Jude Chih</h5>
 		</footer>
 	</div>
-
 </body>
 </html>
