@@ -1,0 +1,134 @@
+$span_bacc:#555;
+$span_fc:#ddd;
+$h3_font_color:#005CAF;
+$h2_font_color:#ddd;
+$h6_font_color:#ddd;
+$header_height:60px;
+
+@mixin rwd_w_h($height:100%) {
+	width: 100%;
+	height: $height;
+}
+@mixin padding_style($tb:1,$lr:1){
+	padding:($tb * 5px) ($lr * 5px);
+}
+
+@import url(https://fonts.googleapis.com/css?family=Josefin+Sans);
+@import url(http://fonts.googleapis.com/earlyaccess/notosanstc.css);
+*{
+	list-style:none;
+}
+@keyframes move{
+	0%{top:0;}
+	25%{top:-2px;}
+	50%{top:0;}
+	75%{top:2px}
+	100%{top:0;}
+}
+html,body{
+	@include rwd_w_h();
+	font-family: 'Noto Sans TC','Josefin Sans', sans-serif;
+	#wrap{
+		position: relative;
+		@include rwd_w_h();
+		.three_btns{
+			z-index:999;
+			text-align:center;
+			position:fixed;
+			top: calc(50% - 30px);
+			right:0;
+			.previous_btn{
+				background-color:$span_bacc;
+				border-radius:14px 14px 0 0;
+				color:$span_fc;
+				cursor:pointer;
+				overflow:hidden;
+			}
+			.previous_btn i{
+				position:relative;
+			}
+			.previous_btn i.move,.next_btn i.move{
+				animation:move .5s infinite;
+			}
+			.top_btn{
+				cursor:pointer;
+				background-color:#fff;
+			}
+			.next_btn{
+				transform:rotate(180deg);
+				background-color:$span_bacc;
+				border-radius:14px 14px 0 0;
+				color:$span_fc;
+				cursor:pointer;
+				overflow:hidden;
+			}
+			.next_btn i{
+				position:relative;
+			}
+		}
+		header{
+			.navbar-brand{
+				padding:0;
+			}
+		}
+		#main{
+			h2{
+				color:$h2_font_color;
+			}
+			h3{
+				color:$h3_font_color;
+				@include padding_style(2,0);
+				border-bottom:1px solid #888;
+			}
+			h6{
+				color:$h6_font_color;
+			}
+			p{
+				@include padding_style(1,0);
+				line-height:35px;
+			}
+			span{
+				border-radius: 5px;
+				@include padding_style();
+				background-color: $span_bacc;
+				color:$span_fc;
+			}
+			.note_border{
+				border: 1px solid #ccc;
+				margin-bottom:10px;
+				border-radius:5px;
+				background-color: $span_bacc;
+				padding-bottom:15px;
+				background-image: linear-gradient(to bottom,#3c3c3c 0,#222 96px,#222 100%);
+			}
+			.note_content{
+				background-color:#fff;
+				border-radius:5px;
+				box-shadow:inset 1px 1px 5px 1px $span_bacc;
+			}
+		}
+		footer{
+			background-image: linear-gradient(to bottom,#3c3c3c 0,#222 100%);
+			padding-top:40px;
+			color:$span_fc;
+			display:block;
+			height:100px;
+			text-align:center;
+		}
+	}
+}
+@media only screen and (max-width:480px) {
+	.three_btns{
+		display:none;
+	}
+	#main{
+		margin-top:50px;
+	}
+	header{
+		top: 0;
+		width:100%;
+		position:fixed;
+		z-index:999;
+	}
+}
+

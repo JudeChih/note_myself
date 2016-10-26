@@ -50,7 +50,16 @@
 				        	<li class="active"><a href="php_note.html">PHP</a></li>
 				      	</ul>
 				      	<ul class="nav navbar-nav navbar-right">
-				        	<li><a href="#">Jude志的程式之旅</a></li>
+				        	<li class="dropdown">
+					          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Jude志的程式足跡 <span class="caret"></span></a>
+					          <ul class="dropdown-menu" role="menu">
+					            <li><a href="https://github.com/JudeChih" target="_blank">GitHub</a></li>
+					            <li><a href="https://gist.github.com/JudeChih" target="_blank">Gist</a></li>
+					            <li><a href="http://codepen.io/jude123/" target="_blank">CODEPEN</a></li>
+					            <li class="divider"></li>
+					            <li><a href="http://www.q888.com.tw/Jude/index.html" target="_blank">Resume</a></li>
+					          </ul>
+					        </li>
 				      	</ul>
 				    </div>
 				</div>
@@ -123,6 +132,122 @@ if(!$mail->Send()) {
 						</pre>
 					</div>
 				</div>
+				<div id="php_note2" class="col-md-12 note_border">
+					<h2>檔案上傳的寫法以及判斷</h2>
+					<h6><var>公司網站需要用到，找不到好的套件只好自行開發囉</var></h6>
+					<div class="col-md-12 note_content">
+						<h3>form表單的寫法</h3>
+						<p>html的架構大致上是以下這樣</p>
+						<pre>
+<div class="form-group col-md-12">
+  <label for="fileToUpload" class="">檔案上傳：</label>
+  <div class="">
+  	<input type="file" name="fileToUpload" id="fileToUpload" class="form-control">
+  	<p class="help-block">只能上傳tar.gz, .rar, .zip格式的檔案</p>
+  </div>
+</div>
+						</pre>
+						<p>php會做一個api</p>
+						<pre>
+// 存取路徑
+$target_dir = "file/";
+$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+$uploadOk = 1;
+$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+// 檢查上傳的檔案是否為真的
+$check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+if($check !== false) {
+    $uploadOk = 1;
+    echo '1'."<br />";
+} else {
+    $uploadOk = 0;
+    echo '0'."<br />";
+}
+// 檢查檔案是否已經存在
+if (file_exists($target_file)) {
+    echo "Sorry, file already exists."."<br />";
+    $uploadOk = 0;
+}
+// 檢查檔案大小
+if ($_FILES["fileToUpload"]["size"] > 15*1024*1024) {
+    echo "Sorry, your file is too large."."<br />";
+    $uploadOk = 0;
+}
+// 檢查檔案副檔名是否符合要求
+if($imageFileType != "tar.gz" && $imageFileType != "rar" && $imageFileType != "zip" ) {
+    echo "Sorry, only tar.gz, .rar, .zip files are allowed."."<br />";
+    $uploadOk = 0;
+}
+// 回報錯誤或是回報上傳成功或是有其他未知的錯誤
+if ($uploadOk == 0) {
+    echo "Sorry, your file was not uploaded."."<br />";
+} else {
+    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded."."<br />";
+    		$uploadOk = 1;
+    } else {
+        echo "Sorry, there was an error uploading your file."."<br />";
+    }
+}
+						</pre>
+					</div>
+				</div>
+				<div id="php_note3" class="col-md-12 note_border">
+					<h2>PHP連接MySQL外加insert</h2>
+					<h6><var></var></h6>
+					<div class="col-md-12 note_content">
+						<h3>前言</h3>
+						<p>首先我用form表單為例，然後填寫完資料以後按送出，會觸發一些api做事情，html的code這邊就不貼了，直接進入主題</p>
+						<h3>連接MySQL</h3>
+						<p>以下是你要連的資料庫的一些基本的設定，按照修改一下就可以了</p>
+						<pre>
+$dbhost = "IP位址";
+$dbuser = "帳號";
+$dbpass = "密碼";
+$dbname = "資料庫";
+$bdtable = "資料庫底下的某個table";
+$mysqli = new mysqli($dbhost,$dbuser,$dbpass,$bdname);
+// 連接有問題底下這是用來除錯的
+if ($mysqli->connect_error) {
+  die("Connection failed: " . $mysqli->connect_error);
+}
+// 以防亂碼
+$mysqli->query("SET NAMES utf8");
+						</pre>
+						<h3>抓取form表單的資料</h3>
+						<p>這邊就簡單帶過，該如何抓取form表單裡面各個欄位的值，並且設定成變數，方便接下來要存入資料庫用</p>
+						<pre>
+$contact_person = $_POST['contact_person'];
+$email = $_POST['email'];
+$contact_phone = $_POST['contact_phone'];
+$companyname = $_POST['companyname'];
+$company_address = $_POST['company_address'];
+$pc_volume = $_POST['pc_volume'];
+$apply_for = $_POST['apply_for'];
+$description = $_POST['description'];
+						</pre>
+						<p>所用的方式跟你的form是用什麼方式傳出值有關，我這邊用的是post的方式，所以用<span>$_POST['']</span>接值</p>
+						<h3>新增到資料庫</h3>
+						<p>如果上面連接資料庫跟抓取值都沒問題的話，這邊新增資料就真的輕鬆寫意拉</p>
+						<pre>
+$stmt = "INSERT INTO $dbname.$bdtable ( uniq_id, contact_person, email, contact_phone, companyname, company_address, pc_volume, apply_for, description) VALUES('456','$contact_person','$email','$contact_phone','$companyname','$company_address','$pc_volume','$apply_for','$description')";
+
+// 溫馨提醒
+if ($mysqli->query($stmt) === TRUE) {
+  $_SESSION['success'] = "親愛的用戶您好，已收到您的申請表單，我們會馬上安排人員與您聯繫，請耐心等候，謝謝";
+} else {
+  echo "Error: " . $stmt . "<br>" . $mysqli->error;
+}
+$mysqli->close();
+						</pre>
+						<p>當然為了方便除錯，這邊我會設定這個溫馨提醒，如果沒有新增成功會跳錯誤，最後還要記得順便把資料庫關閉，避免不必要的錯誤</p>
+					</div>
+				</div>
+
+
+
+
+
 			</div>
 		</div>
 		<footer>
