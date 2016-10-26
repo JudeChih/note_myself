@@ -5,7 +5,6 @@ $(function(){
 		$("#main").load("js_note.html");
 	})
 
-
 	$('.three_btns div').hover(function(){
 		$(this).find('i').addClass('move');
 	},function(){

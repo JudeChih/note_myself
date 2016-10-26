@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" type="image/x-icon" href="images/Bnter.png">
+	<title>Php_Note by Jude</title>
+
+	<!-- css style -->
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="stylesheets/note_style.css">
+	<!-- //css style -->
+
+	<!-- js style -->
+	<script src="js/jquery-3.1.0.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/note_style.js"></script>
+	<!-- //js style -->
+
+</head>
+<body>
+	<div id="wrap">
+		<div class="three_btns">
+			<div class="previous_btn" data-index="1"><i class="fa fa-chevron-up" aria-hidden="true"></i></div>
+			<div class="top_btn" data-index="2">TOP</div>
+			<div class="next_btn" data-index="3"><i class="fa fa-chevron-up" aria-hidden="true"></i></div>
+		</div>
+		<header>
+			<nav class="navbar navbar-inverse" role="navigation">
+				<div class="container-fluid">
+				    <div class="navbar-header">
+				      	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					        <span class="sr-only">Toggle navigation</span>
+					        <span class="icon-bar"></span>
+					        <span class="icon-bar"></span>
+					        <span class="icon-bar"></span>
+				      	</button>
+					    <a class="navbar-brand" href="#">
+					      	<img src="images/Bnter-2.png" alt="">
+					    </a>
+				    </div>
+				    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				      	<ul class="nav navbar-nav">
+				        	<!-- <li><a href="">HTML<span class="sr-only">(current)</span></a></li>
+				        	<li><a href="">CSS</a></li> -->
+				        	<li><a href="sass_note.html">SASS</a></li>
+				        	<li><a href="js_note.html">JS</a></li>
+				        	<li class="active"><a href="php_note.html">PHP</a></li>
+				      	</ul>
+				      	<ul class="nav navbar-nav navbar-right">
+				        	<li><a href="#">Jude志的程式之旅</a></li>
+				      	</ul>
+				    </div>
+				</div>
+			</nav>
+		</header>
+<!--<div id="php_note1" class="col-md-12 note_border">
+			<h2></h2>
+			<h6><var></var></h6>
+			<div class="col-md-12 note_content">
+				<h3></h3>
+				<p></p>
+				<pre>
+				</pre>
+			</div>
+		</div> -->
+		<div id="main" class="container">
+			<div class="row">
+				<div class="page-header">
+				  	<h1>PHP隨手記 <small> by Jude</small></h1>
+				</div>
+				<div id="php_note1" class="col-md-12 note_border">
+					<h2>使用PHPMailer利用Gmail的SMTP發信</h2>
+					<h6><var>首先，先由右方取得PHPMailer，下載完畢後解壓再把class.phpmailer.php、class.smtp.php二個類別檔拷貝出來<a href="http://www.mediafire.com/?iaouxtgo9w8g9h5">下載處</a></var></h6>
+					<div class="col-md-12 note_content">
+						<h3>使用前注意事項</h3>
+						<p>1.使用PHPmailer時，PHP 必須安裝 OpenSSL 的擴充程式。 最好使用php 5以上，因為php 4 ，有OpenSSL的bug…，然後phpmailer 使用2.1 以上版本for php 5/6。關於openssl的安裝方式可以參考一下這篇文章 「<a href="http://blog.yogo.tw/2009/08/phpopenssl.html">php安裝openssl的方法</a> 」。</p>
+						<p>2.使用 PHPMailer 透過 Gmail 帳號寄信時，需要採用安全性較低的登入技術，所以要開啟安全性較低的應用程式存取權限，您可以在登入 Gmail 帳號後由<a href="https://www.google.com/settings/security/lesssecureapps">https://www.google.com/settings/security/lesssecureapps</a> 開啟，否則會造成「send-mail: Authorization failed 534 5.7.14」認證錯誤。</p>
+						<p>3.開發測試時建議您可以開啟 PHPMailer 的 Debug 模式，可以很清楚知道運作的過程，若發生錯誤也可以很快得知問題所在，其語法如下：</p>
+						<pre>
+//Enable SMTP debugging
+// 0 = off (for production use)
+// 1 = client messages
+// 2 = client and server messages
+$mail->SMTPDebug = 2;
+						</pre>
+						<p>這邊只提供PHP需要設定的地方的code</p>
+						<pre>
+include("class.phpmailer.php"); //匯入PHPMailer類別
+
+$Name=$_POST['sndname'];
+$Mail=$_POST['sendmail'];
+$Subject=$_POST['subject'];
+$Sendbody=$_POST['sendbody'];
+
+$mail= new PHPMailer(); //建立新物件
+$mail->IsSMTP(); //設定使用SMTP方式寄信
+$mail->SMTPAuth = true; //設定SMTP需要驗證
+$mail->SMTPSecure = "ssl"; // Gmail的SMTP主機需要使用SSL連線
+$mail->Host = "smtp.gmail.com"; //Gamil的SMTP主機
+$mail->Port = 465;  //Gamil的SMTP主機的埠號(Gmail為465)。
+$mail->CharSet = "utf-8"; //郵件編碼
+
+$mail->Username = "xxxx@gmail.com"; //Gamil帳號
+$mail->Password = "password"; //Gmail密碼
+
+$mail->From = $Mail; //寄件者信箱
+$mail->FromName = "線上客服"; //寄件者姓名
+
+$mail->Subject ="一封線上客服信";  //郵件標題
+$mail->Body = "姓名:".$Name."信箱:".$Mail."主題:".$Subject."回應內容:".$Sendbody; //郵件內容
+
+$mail->IsHTML(true); //郵件內容為html ( true || false)
+$mail->AddAddress("who@mail.com.tw"); //收件者郵件及名稱
+
+if(!$mail->Send()) {
+	echo "發送錯誤: " . $mail->ErrorInfo;
+} else {
+	echo "感謝您的回覆，我們將會盡速處理!";
+}
+						</pre>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer>
+			<h5>Copyright © 2016 Jude Chih</h5>
+		</footer>
+	</div>
+</body>
+</html>

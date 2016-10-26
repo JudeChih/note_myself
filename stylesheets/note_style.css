@@ -1,6 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Josefin+Sans);
 @import url(http://fonts.googleapis.com/earlyaccess/notosanstc.css);
-/* line 17, ../sass/note_style.scss */
+/* line 18, ../sass/note_style.scss */
 * {
   list-style: none;
 }
@@ -22,19 +22,19 @@
     top: 0;
   }
 }
-/* line 27, ../sass/note_style.scss */
+/* line 28, ../sass/note_style.scss */
 html, body {
   width: 100%;
   height: 100%;
   font-family: 'Noto Sans TC','Josefin Sans', sans-serif;
 }
-/* line 30, ../sass/note_style.scss */
+/* line 31, ../sass/note_style.scss */
 html #wrap, body #wrap {
   position: relative;
   width: 100%;
   height: 100%;
 }
-/* line 33, ../sass/note_style.scss */
+/* line 34, ../sass/note_style.scss */
 html #wrap .three_btns, body #wrap .three_btns {
   z-index: 999;
   text-align: center;
@@ -42,7 +42,7 @@ html #wrap .three_btns, body #wrap .three_btns {
   top: calc(50% - 30px);
   right: 0;
 }
-/* line 39, ../sass/note_style.scss */
+/* line 40, ../sass/note_style.scss */
 html #wrap .three_btns .previous_btn, body #wrap .three_btns .previous_btn {
   background-color: #555;
   border-radius: 14px 14px 0 0;
@@ -50,20 +50,20 @@ html #wrap .three_btns .previous_btn, body #wrap .three_btns .previous_btn {
   cursor: pointer;
   overflow: hidden;
 }
-/* line 46, ../sass/note_style.scss */
+/* line 47, ../sass/note_style.scss */
 html #wrap .three_btns .previous_btn i, body #wrap .three_btns .previous_btn i {
   position: relative;
 }
-/* line 49, ../sass/note_style.scss */
+/* line 50, ../sass/note_style.scss */
 html #wrap .three_btns .previous_btn i.move, html #wrap .three_btns .next_btn i.move, body #wrap .three_btns .previous_btn i.move, body #wrap .three_btns .next_btn i.move {
   animation: move .5s infinite;
 }
-/* line 52, ../sass/note_style.scss */
+/* line 53, ../sass/note_style.scss */
 html #wrap .three_btns .top_btn, body #wrap .three_btns .top_btn {
   cursor: pointer;
   background-color: #fff;
 }
-/* line 56, ../sass/note_style.scss */
+/* line 57, ../sass/note_style.scss */
 html #wrap .three_btns .next_btn, body #wrap .three_btns .next_btn {
   transform: rotate(180deg);
   background-color: #555;
@@ -72,41 +72,41 @@ html #wrap .three_btns .next_btn, body #wrap .three_btns .next_btn {
   cursor: pointer;
   overflow: hidden;
 }
-/* line 64, ../sass/note_style.scss */
+/* line 65, ../sass/note_style.scss */
 html #wrap .three_btns .next_btn i, body #wrap .three_btns .next_btn i {
   position: relative;
 }
-/* line 69, ../sass/note_style.scss */
+/* line 70, ../sass/note_style.scss */
 html #wrap header .navbar-brand, body #wrap header .navbar-brand {
   padding: 0;
 }
-/* line 74, ../sass/note_style.scss */
+/* line 75, ../sass/note_style.scss */
 html #wrap #main h2, body #wrap #main h2 {
   color: #ddd;
 }
-/* line 77, ../sass/note_style.scss */
+/* line 78, ../sass/note_style.scss */
 html #wrap #main h3, body #wrap #main h3 {
   color: #005CAF;
   padding: 10px 0px;
   border-bottom: 1px solid #888;
 }
-/* line 82, ../sass/note_style.scss */
+/* line 83, ../sass/note_style.scss */
 html #wrap #main h6, body #wrap #main h6 {
   color: #ddd;
 }
-/* line 85, ../sass/note_style.scss */
+/* line 86, ../sass/note_style.scss */
 html #wrap #main p, body #wrap #main p {
   padding: 5px 0px;
   line-height: 35px;
 }
-/* line 89, ../sass/note_style.scss */
+/* line 90, ../sass/note_style.scss */
 html #wrap #main span, body #wrap #main span {
   border-radius: 5px;
   padding: 5px 5px;
   background-color: #555;
   color: #ddd;
 }
-/* line 95, ../sass/note_style.scss */
+/* line 96, ../sass/note_style.scss */
 html #wrap #main .note_border, body #wrap #main .note_border {
   border: 1px solid #ccc;
   margin-bottom: 10px;
@@ -115,13 +115,13 @@ html #wrap #main .note_border, body #wrap #main .note_border {
   padding-bottom: 15px;
   background-image: linear-gradient(to bottom, #3c3c3c 0, #222 96px, #222 100%);
 }
-/* line 103, ../sass/note_style.scss */
+/* line 104, ../sass/note_style.scss */
 html #wrap #main .note_content, body #wrap #main .note_content {
   background-color: #fff;
   border-radius: 5px;
   box-shadow: inset 1px 1px 5px 1px #555;
 }
-/* line 109, ../sass/note_style.scss */
+/* line 110, ../sass/note_style.scss */
 html #wrap footer, body #wrap footer {
   background-image: linear-gradient(to bottom, #3c3c3c 0, #222 100%);
   padding-top: 40px;
@@ -132,17 +132,17 @@ html #wrap footer, body #wrap footer {
 }
 
 @media only screen and (max-width: 480px) {
-  /* line 120, ../sass/note_style.scss */
+  /* line 121, ../sass/note_style.scss */
   .three_btns {
     display: none;
   }
 
-  /* line 123, ../sass/note_style.scss */
+  /* line 124, ../sass/note_style.scss */
   #main {
     margin-top: 50px;
   }
 
-  /* line 126, ../sass/note_style.scss */
+  /* line 127, ../sass/note_style.scss */
   header {
     top: 0;
     width: 100%;
